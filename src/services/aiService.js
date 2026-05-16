@@ -14,12 +14,27 @@ export const analyzeCodeCrimeWithFindings = async (code, errorMessage, structura
       })
     });
 
+    const contentType = response.headers.get('content-type');
+    
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.error || 'Failed to contact the forensic lab.');
+      let errorMessage = 'Failed to contact the forensic lab.';
+      if (contentType && contentType.includes('application/json')) {
+        const errorData = await response.json();
+        errorMessage = errorData.error || errorMessage;
+      } else {
+        const textError = await response.text();
+        console.error('Server returned non-JSON error:', textError);
+      }
+      throw new Error(errorMessage);
     }
 
-    return await response.json();
+    if (contentType && contentType.includes('application/json')) {
+      return await response.json();
+    } else {
+      const text = await response.text();
+      console.error('Expected JSON but got:', text);
+      throw new Error('The forensic lab returned an illegible report (non-JSON).');
+    }
   } catch (error) {
     console.error('Forensic Lab Connection Error:', error);
     throw error;
