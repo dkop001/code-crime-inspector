@@ -1,4 +1,4 @@
-const BACKEND_URL = 'http://localhost:3001/api/analyze';
+const BACKEND_URL = '/api/analyze';
 
 export const analyzeCodeCrimeWithFindings = async (code, errorMessage, structuralFindings) => {
   try {
