@@ -30,7 +30,7 @@ const ReportCrime = ({ onSubmit }) => {
         padding: '2rem',
         borderRadius: 'var(--radius-lg)',
         position: 'relative',
-        overflow: 'hidden'
+        overflow: 'visible'
       }}>
         <h2 style={{ 
           fontFamily: 'var(--font-ui)', 
@@ -80,7 +80,7 @@ const ReportCrime = ({ onSubmit }) => {
                   border: '1px solid var(--surface-highlight)',
                   borderRadius: 'var(--radius-md)',
                   marginTop: '0.5rem',
-                  zIndex: 10,
+                  zIndex: 1000,
                   boxShadow: '0 10px 25px rgba(0,0,0,0.5)',
                   overflow: 'hidden',
                   animation: 'fadeIn 0.2s ease-out'
