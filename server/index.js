@@ -56,7 +56,7 @@ async function fetchWithTimeout(resource, options = {}) {
 }
 
 app.post('/api/analyze', async (req, res) => {
-  const { code, errorMessage, structuralFindings } = req.body;
+  const { code, errorMessage, structuralFindings, language } = req.body;
 
   if (!API_KEY) {
     return res.status(500).json({ error: 'API Key missing in forensic lab.' });
@@ -102,6 +102,8 @@ app.post('/api/analyze', async (req, res) => {
 
   const userPrompt = `
     EVIDENCE MATERIAL:
+    LANGUAGE: ${language || 'javascript'}
+
     CODE:
     ${code}
 

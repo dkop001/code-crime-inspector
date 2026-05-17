@@ -1,6 +1,6 @@
 const BACKEND_URL = '/api/analyze';
 
-export const analyzeCodeCrimeWithFindings = async (code, errorMessage, structuralFindings) => {
+export const analyzeCodeCrimeWithFindings = async (code, errorMessage, structuralFindings, language) => {
   try {
     const response = await fetch(BACKEND_URL, {
       method: 'POST',
@@ -10,7 +10,8 @@ export const analyzeCodeCrimeWithFindings = async (code, errorMessage, structura
       body: JSON.stringify({
         code,
         errorMessage,
-        structuralFindings
+        structuralFindings,
+        language
       })
     });
 

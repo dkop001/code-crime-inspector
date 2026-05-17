@@ -4,11 +4,12 @@ import Editor from '@monaco-editor/react';
 const ReportCrime = ({ onSubmit }) => {
   const [code, setCode] = useState('// Paste suspected code here...\nfunction investigate() {\n  \n}');
   const [errorMsg, setErrorMsg] = useState('');
+  const [language, setLanguage] = useState('javascript');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!code.trim()) return;
-    onSubmit(code, errorMsg);
+    onSubmit(code, errorMsg, language);
   };
 
   const handleEditorChange = (value) => {
@@ -40,6 +41,21 @@ const ReportCrime = ({ onSubmit }) => {
         
         <form onSubmit={handleSubmit}>
           <div className="form-group">
+            <label className="form-label" htmlFor="language-select">
+              LANGUAGE
+            </label>
+            <select
+              id="language-select"
+              className="form-select"
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+            >
+              <option value="javascript">JavaScript</option>
+              <option value="python">Python</option>
+            </select>
+          </div>
+
+          <div className="form-group">
             <label className="form-label" htmlFor="code-editor">
               EVIDENCE-01: Source Material (Monaco Lab)
             </label>
@@ -51,7 +67,7 @@ const ReportCrime = ({ onSubmit }) => {
             }}>
               <Editor
                 height="100%"
-                defaultLanguage="javascript"
+                language={language}
                 defaultValue={code}
                 theme="vs-dark"
                 onChange={handleEditorChange}

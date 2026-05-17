@@ -12,17 +12,17 @@ function App() {
   const [investigationResult, setInvestigationResult] = useState(null);
   const [investigationError, setInvestigationError] = useState(null);
 
-  const startInvestigation = async (code, error) => {
-    setEvidence({ code, error });
+  const startInvestigation = async (code, error, language) => {
+    setEvidence({ code, error, language });
     setAppState('loading');
     setInvestigationError(null);
     
     try {
-      // 1. AST Parsing & Rule Engine
-      const structuralFindings = parseCode(code);
+      // 1. AST Parsing & Rule Engine (JS only)
+      const structuralFindings = language === 'javascript' ? parseCode(code) : [];
       
       // 2. AI Commentary based on parser findings
-      const result = await analyzeCodeCrimeWithFindings(code, error, structuralFindings);
+      const result = await analyzeCodeCrimeWithFindings(code, error, structuralFindings, language);
       
       setInvestigationResult(result);
       setAppState('dashboard');
