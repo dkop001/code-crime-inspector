@@ -52,7 +52,7 @@ const ReportCrime = ({ onSubmit }) => {
             <label className="form-label">
               LANGUAGE
             </label>
-            <div className="custom-dropdown" style={{ position: 'relative' }}>
+            <div className="custom-dropdown desktop-only" style={{ position: 'relative' }}>
               <div 
                 className="form-select" 
                 onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -108,6 +108,26 @@ const ReportCrime = ({ onSubmit }) => {
                 </div>
               )}
             </div>
+
+            {/* Mobile Native Select */}
+            <select
+              className="form-select mobile-only"
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+              style={{
+                width: '100%',
+                padding: '1.25rem',
+                borderRadius: 'var(--radius-md)',
+                background: 'rgba(255, 255, 255, 0.03)',
+                color: 'var(--text-primary)',
+                border: '1px solid rgba(255, 255, 255, 0.05)',
+                appearance: 'auto' /* Use native appearance for arrow on mobile */
+              }}
+            >
+              {languages.map(l => (
+                <option key={l.value} value={l.value} style={{ background: '#0d0d13', color: 'var(--text-primary)' }}>{l.label}</option>
+              ))}
+            </select>
           </div>
 
           <div className="form-group">

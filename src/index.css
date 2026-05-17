@@ -257,6 +257,14 @@ body {
 }
 
 /* Mobile Responsiveness */
+.desktop-only {
+  display: block;
+}
+
+.mobile-only {
+  display: none;
+}
+
 @media (max-width: 768px) {
   #root {
     padding: var(--spacing-sm);
@@ -264,5 +272,13 @@ body {
   
   .form-group {
     margin-bottom: var(--spacing-md);
+  }
+  
+  .desktop-only {
+    display: none;
+  }
+  
+  .mobile-only {
+    display: block;
   }
 }
